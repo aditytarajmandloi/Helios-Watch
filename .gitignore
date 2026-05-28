@@ -47,3 +47,8 @@ lerna-debug.log*
 .Trashes
 ehthumbs.db
 Thumbs.db
+
+# Custom project ignores
+explain/
+client/data/background frames/
+client/data/new/
