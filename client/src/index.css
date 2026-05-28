@@ -1,0 +1,97 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Theme Variables ───────────────────────────── */
+:root,
+[data-theme="dark"] {
+  --bg-page: #050508;
+  --bg-panel: rgba(15, 23, 42, 0.4);
+  --bg-panel-solid: #0d1321;
+  --bg-card: rgba(255, 255, 255, 0.02);
+  --bg-card-hover: rgba(255, 255, 255, 0.06);
+  --bg-input: #0f172a;
+  --bg-tooltip: #0c1322;
+  --border-panel: rgba(255, 255, 255, 0.05);
+  --border-card: rgba(255, 255, 255, 0.05);
+  --border-input: #334155;
+  --text-primary: #e2e8f0;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --text-dim: #475569;
+  --text-faint: #334155;
+  --chart-grid: #1e293b;
+  --chart-axis: #64748b;
+  --scrollbar-thumb: rgba(249, 115, 22, 0.15);
+  --scrollbar-thumb-hover: rgba(249, 115, 22, 0.35);
+  --glass-bg: rgba(15, 23, 42, 0.4);
+  --glass-border: rgba(255, 255, 255, 0.05);
+  --glass-blur: 12px;
+  --glow-overlay: rgba(255, 255, 255, 0.02);
+}
+
+[data-theme="light"] {
+  --bg-page: #f1f5f9;
+  --bg-panel: rgba(255, 255, 255, 0.95);
+  --bg-panel-solid: #ffffff;
+  --bg-card: #f8fafc;
+  --bg-card-hover: #f1f5f9;
+  --bg-input: #ffffff;
+  --bg-tooltip: #ffffff;
+  --border-panel: #cbd5e1;
+  --border-card: #e2e8f0;
+  --border-input: #cbd5e1;
+  --text-primary: #0f172a;
+  --text-secondary: #1e293b;
+  --text-muted: #334155;
+  --text-dim: #475569;
+  --text-faint: #64748b;
+  --chart-grid: #e2e8f0;
+  --chart-axis: #475569;
+  --scrollbar-thumb: rgba(59, 130, 246, 0.25);
+  --scrollbar-thumb-hover: rgba(59, 130, 246, 0.45);
+  --glass-bg: rgba(255, 255, 255, 0.9);
+  --glass-border: #cbd5e1;
+  --glass-blur: 12px;
+  --glow-overlay: transparent;
+}
+
+@layer utilities {
+  .glass-panel {
+    background: var(--glass-bg);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    border: 1px solid var(--glass-border);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  }
+}
+
+@layer base {
+  html { background: var(--bg-page); }
+  body {
+    background: var(--bg-page);
+    color: var(--text-primary);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    min-height: 100vh;
+    overflow-x: hidden;
+    margin: 0;
+    font-family: 'Inter', 'Outfit', system-ui, sans-serif;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  ::-webkit-scrollbar { width: 3px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: var(--scrollbar-thumb); border-radius: 2px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--scrollbar-thumb-hover); }
+}
+
+/* ── Animations ──────────────────────────────── */
+
+@keyframes glow-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50%      { background-position: 100% 50%; }
+}
+
+::selection { background: rgba(59, 130, 246, 0.2); }
+[data-theme="dark"] ::selection { background: rgba(249, 115, 22, 0.15); }
