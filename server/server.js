@@ -11,14 +11,18 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 // Middleware
-app.use(cors());
+// UPDATED: Dynamic CORS for Express HTTP routes
+app.use(cors({
+  origin: process.env.CLIENT_URL || "http://localhost:5173"
+}));
 app.use(express.json());
 
 // Create HTTP server and bind Socket.io to it
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: "http://localhost:5173", // Your React app's URL
+    // UPDATED: Dynamic CORS for WebSocket connections
+    origin: process.env.CLIENT_URL || "http://localhost:5173",
     methods: ["GET", "POST"]
   }
 });
@@ -56,7 +60,8 @@ mongoose.connect(process.env.MONGODB_URI)
     console.log('Running initial sync...');
     fetchNOAAData(io).then(() => fetchNASAData(io)).then(() => fetchKpData(io)).then(() => fetchXrayData(io)).then(() => fetchElectronData(io));
 
-    server.listen(PORT, () => {
+    // UPDATED: Bind to 0.0.0.0 for external routing on Render
+    server.listen(PORT, '0.0.0.0', () => {
       console.log(`HeliosWatch Server running on port ${PORT}`);
     });
   })
