@@ -163,7 +163,8 @@ const CorrelationChart = ({ data = [], dark }) => {
         }
       });
       const timeRange = data.length > 5000 ? '7D' : data.length > 1000 ? '24H' : '6H';
-      const res = await axios.post('http://localhost:5000/api/ai-insight', {
+      const apiUrl = import.meta.env.VITE_API_URL ? `${import.meta.env.VITE_API_URL}/ai-insight` : 'http://localhost:5000/api/ai-insight';
+      const res = await axios.post(apiUrl, {
         selectedMetrics: selected,
         summaryStats,
         timeRange
