@@ -14,7 +14,9 @@ const createTransporter = () => {
     },
     tls: {
       rejectUnauthorized: false
-    }
+    },
+    // Force IPv4 because Render does not support IPv6 routing and causes ENETUNREACH
+    family: 4
   });
 };
 
